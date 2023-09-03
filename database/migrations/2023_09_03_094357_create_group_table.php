@@ -6,20 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('sessions', function (Blueprint $table) {
+        Schema::create('group', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('location_id');
             $table->foreignId('tenant_id');
-            $table->unsignedTinyInteger('type')->default(0);
-            $table->string('notes')->nullable();
-            $table->date('start');
-            $table->date('end');
+            $table->string('name');
+            $table->string('description');
+            $table->unsignedInteger('minAge')->nullable();
+            $table->unsignedInteger('maxAge')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('trainings');
+        Schema::dropIfExists('group');
     }
 };
